@@ -1,0 +1,471 @@
+SQL> spool
+currently spooling to p2.lst
+SQL> CREATE TABLE ASIGNATURA
+  2  (CAS NUMBER(3) PRIMARY KEY,
+  3  A VARCHAR2(50) NOT NULL,
+  4  T CHAR(4) NOT NULL,
+  5  CUR NUMBER(1) CHECK (CUR BETWEEN 1 AND 5),
+  6  CAR NUMBER(3) REFERENCES AREA ON DELETE SET NULL,
+  7  CT NUMBER(3,1) DEFAULT 0.0,
+  8  CP NUMBER(3,1) DEFAULT 0.0,
+  9  CL NUMBER(3,1) DEFAULT 0.0);
+
+Table created.
+
+SQL> CREATE TABLE PLAN_DOCENTE
+  2  (DNI NUMBER(8),
+  3  CAS NUMBER(3),
+  4  CTA NUMBER(3,1) DEFAULT 0.0,
+  5  CPA NUMBER(3,1) DEFAULT 0.0
+  6  ,
+  7  CLA NUMBER(3,1) DEFAULT 0.0,
+  8  FI DATE DEFAULT SYSDATE,
+  9  FF DATE,
+ 10  PRIMARY KEY (DNI,CAS,FI),
+ 11  FOREIGN KEY (CAS) REFERENCES ASIGNATURA ON DELETE CASCADE,
+ 12  FOREIGN KEY (DNI) REFERENCES PROFESOR ON DELETE CASCADE,
+ 13  CHECK (FF>=FI));
+
+Table created.
+
+SQL> INSERT INTO DEPARTAMENTO
+  2  VALUES(1,'ANALISIS MATEMATICO');
+
+1 row created.
+
+SQL> SELECT *
+  2  FROM DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+
+SQL> INSERT INTO DEPARTAMENTO
+  2  VALUES(2,'ASTROFISICA');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTAMENTO
+  2  VALUES(3,'ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTAMENTO
+  2  VALUES(4,'MATEMATICA FUNDAMENTAL');
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (1,"ALGEBRA",4);
+VALUES (1,"ALGEBRA",4)
+          *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO AREA
+  2  VALUES (1,'ALGEBRA',4);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (2,'ANALISIS MATEMATICO',1);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (3,'ASTRONOMIA Y ASTROFISICA',2);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (4,'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL',);
+VALUES (4,'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL',)
+                                                                 *
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> VALUES (4,'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL',3);
+SP2-0734: unknown command beginning "VALUES (4,..." - rest of line ignored.
+SQL> INSERT INTO AREA
+  2  VALUES (4,'CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL',3);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (5,'DIDACTICAS DE LA MATEMATICA',1);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (6,'ESTADISTICA E INVESTIGACION OPERATIVA',3);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (7,'LENGUAJES Y SISTEMAS INFORMATICOS',3);
+
+1 row created.
+
+SQL> INSERT INTO AREA
+  2  VALUES (8,'MATEMATICA APLICADA',1);
+
+1 row created.
+
+SQL> COMMIT WORK
+  2  ;
+
+Commit complete.
+
+SQL> SELECT *
+  2  FROM AREA;
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         1 ALGEBRA                                                              
+         4                                                                      
+                                                                                
+         2 ANALISIS MATEMATICO                                                  
+         1                                                                      
+                                                                                
+         3 ASTRONOMIA Y ASTROFISICA                                             
+         2                                                                      
+                                                                                
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         4 CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                 
+         3                                                                      
+                                                                                
+         5 DIDACTICAS DE LA MATEMATICA                                          
+         1                                                                      
+                                                                                
+         6 ESTADISTICA E INVESTIGACION OPERATIVA                                
+         3                                                                      
+                                                                                
+
+       CAR AR                                                                   
+---------- ------------------------------------------------------------         
+        CD                                                                      
+----------                                                                      
+         7 LENGUAJES Y SISTEMAS INFORMATICOS                                    
+         3                                                                      
+                                                                                
+         8 MATEMATICA APLICADA                                                  
+         1                                                                      
+                                                                                
+
+8 rows selected.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(1111,'JUAN',6,'CU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(2222,'CARLOS',7,'TU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(3333,'PEDRO',4,'TEU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(4444,'MARIA',7,'TU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(5555,'IVAN',1,'CEU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(6666,'CARMEN',3,'CD');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(7777,'MARIO',2,'TU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(8888,'FRANCISCO',5,'TU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(9999,'ANGELA',8,'TEU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(1010,'DAVID',4,'TU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(2020,'SOLEDAD',7,'CU');
+
+1 row created.
+
+SQL> INSERT INTO PROFESOR
+  2  VALUES(3030,'JOSE MANUEL',6,'TEU');
+
+1 row created.
+
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(1,'BASE DE DATOS','GII',3,7,3,1.5,1.5)
+  3  ;
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(2,'INTELIGENCIA ARTIFICIAL','GII',3,4,1.5,1.5,3);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(3,'ALMACENES DE DATOS','MII',1,7,1.5,0,1.5);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(4,'MINERIA DE DATOS','MII',1,7,1.5,0,1.5);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(5,'INFORMATICA BASICA','GII',1,7,3,1.5,1.5);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(6,'ALGEBRA','GII',1,1,3,3,0);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(7,'CALCULO','GII',1,8,3,3,0);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(8,'OPTIMIZACION','GII',1,6,3,1.5,1.5);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(9,'GESTION DE RIESGOS','GII',3,4,3,0,3);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(10,'ASTRONOMIA','GF',2,3,3,1.5,1.5);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(11,'ENSENANZA DE LA MATEMATICA','GM',2,5,6,0,0);
+
+1 row created.
+
+SQL> INSERT INTO ASIGNATURA
+  2  VALUES(12,'ANALISIS COMPLEJO','GM',4,2,4.5,3,0);
+
+1 row created.
+
+SQL> COMMIT WORK
+  2  ;
+
+Commit complete.
+
+SQL> SELECT *
+  2  FROMASINATURA
+  3  FROM ASINATURA;
+FROMASINATURA
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT *
+  2  FROM ASINATURA;
+FROM ASINATURA
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT *
+  2  FROM ASIGNATURA;
+
+       CAS A                                                  T           CUR   
+---------- -------------------------------------------------- ---- ----------   
+       CAR         CT         CP         CL                                     
+---------- ---------- ---------- ----------                                     
+         1 BASE DE DATOS                                      GII           3   
+         7          3        1.5        1.5                                     
+                                                                                
+         2 INTELIGENCIA ARTIFICIAL                            GII           3   
+         4        1.5        1.5          3                                     
+                                                                                
+         3 ALMACENES DE DATOS                                 MII           1   
+         7        1.5          0        1.5                                     
+                                                                                
+
+       CAS A                                                  T           CUR   
+---------- -------------------------------------------------- ---- ----------   
+       CAR         CT         CP         CL                                     
+---------- ---------- ---------- ----------                                     
+         4 MINERIA DE DATOS                                   MII           1   
+         7        1.5          0        1.5                                     
+                                                                                
+         5 INFORMATICA BASICA                                 GII           1   
+         7          3        1.5        1.5                                     
+                                                                                
+         6 ALGEBRA                                            GII           1   
+         1          3          3          0                                     
+                                                                                
+
+       CAS A                                                  T           CUR   
+---------- -------------------------------------------------- ---- ----------   
+       CAR         CT         CP         CL                                     
+---------- ---------- ---------- ----------                                     
+         7 CALCULO                                            GII           1   
+         8          3          3          0                                     
+                                                                                
+         8 OPTIMIZACION                                       GII           1   
+         6          3        1.5        1.5                                     
+                                                                                
+         9 GESTION DE RIESGOS                                 GII           3   
+         4          3          0          3                                     
+                                                                                
+
+       CAS A                                                  T           CUR   
+---------- -------------------------------------------------- ---- ----------   
+       CAR         CT         CP         CL                                     
+---------- ---------- ---------- ----------                                     
+        10 ASTRONOMIA                                         GF            2   
+         3          3        1.5        1.5                                     
+                                                                                
+        11 ENSENANZA DE LA MATEMATICA                         GM            2   
+         5          6          0          0                                     
+                                                                                
+        12 ANALISIS COMPLEJO                                  GM            4   
+         2        4.5          3          0                                     
+                                                                                
+
+12 rows selected.
+
+SQL> LINESIZE 130
+SP2-0734: unknown command beginning "LINESIZE 1..." - rest of line ignored.
+SQL> LINESIZE SET 130
+SP2-0734: unknown command beginning "LINESIZE S..." - rest of line ignored.
+SQL> SET LINESIZE 130
+SQL> SET LINESIZE 130;
+SQL> SELECT *
+  2  FROM ASIGNATURA;
+
+       CAS A                                                  T           CUR        CAR         CT         CP         CL         
+---------- -------------------------------------------------- ---- ---------- ---------- ---------- ---------- ----------         
+         1 BASE DE DATOS                                      GII           3          7          3        1.5        1.5         
+         2 INTELIGENCIA ARTIFICIAL                            GII           3          4        1.5        1.5          3         
+         3 ALMACENES DE DATOS                                 MII           1          7        1.5          0        1.5         
+         4 MINERIA DE DATOS                                   MII           1          7        1.5          0        1.5         
+         5 INFORMATICA BASICA                                 GII           1          7          3        1.5        1.5         
+         6 ALGEBRA                                            GII           1          1          3          3          0         
+         7 CALCULO                                            GII           1          8          3          3          0         
+         8 OPTIMIZACION                                       GII           1          6          3        1.5        1.5         
+         9 GESTION DE RIESGOS                                 GII           3          4          3          0          3         
+        10 ASTRONOMIA                                         GF            2          3          3        1.5        1.5         
+        11 ENSENANZA DE LA MATEMATICA                         GM            2          5          6          0          0         
+
+       CAS A                                                  T           CUR        CAR         CT         CP         CL         
+---------- -------------------------------------------------- ---- ---------- ---------- ---------- ---------- ----------         
+        12 ANALISIS COMPLEJO                                  GM            4          2        4.5          3          0         
+
+12 rows selected.
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,1,3,1.5,1.5,'01-SEPT-11',NULL);
+VALUES(4444,1,3,1.5,1.5,'01-SEPT-11',NULL)
+                        *
+ERROR at line 2:
+ORA-01861: literal does not match format string 
+
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,1,3,1.5,1.5,'01-SEPT-11',NULL);
+VALUES(4444,1,3,1.5,1.5,'01-SEPT-11',NULL)
+                        *
+ERROR at line 2:
+ORA-01861: literal does not match format string 
+
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,1,3,1.5,1.5,01-SEPT-11,NULL);
+VALUES(4444,1,3,1.5,1.5,01-SEPT-11,NULL)
+                           *
+ERROR at line 2:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,1,3,1.5,1.5,'01-SEPT-11',NULL);
+VALUES(4444,1,3,1.5,1.5,'01-SEPT-11',NULL)
+                        *
+ERROR at line 2:
+ORA-01861: literal does not match format string 
+
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,1,3,1.5,1.5,'01-SEP-11',NULL);
+
+1 row created.
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,4,1.5,0,1.5,'01-SEP-08','31-AU-10');
+VALUES(4444,4,1.5,0,1.5,'01-SEP-08','31-AU-10')
+                                    *
+ERROR at line 2:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,4,1.5,0,1.5,'01-SEP-08','31-AUG-10');
+
+1 row created.
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(4444,5,3,0,0,'01-SEP-10',NULL);
+
+1 row created.
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(1111,8,3,1.5,1.5,'01-SEP-07','31-AUG-09');
+
+1 row created.
+
+SQL> INSERT INTO PLAN_DOCENTE
+  2  VALUES(1111,8,3,0,0,'01-SEP-09',NULL);
+
+1 row created.
+
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> SPOOL OFF
