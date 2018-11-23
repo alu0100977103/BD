@@ -1,0 +1,933 @@
+SQL> host
+
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                         
+---------                                                                       
+23-NOV-18                                                                       
+
+SQL> SELECT TO_CHAR(SYSDATE,'HH24:MI:SS') FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+11:58:50                                                                        
+
+SQL> SELECT TO_CHAR(SYSDATE,'DAY-DD-MM-YYYY') FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAY-DD-MM-YYYY')                                               
+-----------------------------------------------                                 
+FRIDAY   -23-11-2018                                                            
+
+SQL> SELECT TO_CHAR(SYSDATE,'D-DD-MM-YYYY') FROM DUAL;
+
+TO_CHAR(SYSD                                                                    
+------------                                                                    
+6-23-11-2018                                                                    
+
+SQL> SELECT TO_CHAR(SYSDATE,'HH24:MI:SS') FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:00:11                                                                        
+
+SQL> SELECT SYDATE-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI=8888 AND CAS=11;
+SELECT SYDATE-FI
+       *
+ERROR at line 1:
+ORA-00904: "SYDATE": invalid identifier 
+
+
+SQL> SELECT SYSDATE-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI=8888 AND CAS=11;
+
+SYSDATE-FI                                                                      
+----------                                                                      
+3370.50064                                                                      
+
+SQL> SELECT P FROM PROFESOR WHERE DNI IN (SELECT DNI
+  2  FROM PLAN_DOCENTE
+  3  WHERE SYSDATE-FI>365);
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+CARLOS                                                                          
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+ANGELA                                                                          
+DAVID                                                                           
+SOLEDAD                                                                         
+
+P                                                                               
+------------------------------------------------------------                    
+JOSE MANUEL                                                                     
+
+12 rows selected.
+
+SQL> SELECT *
+  2  FROM PROFESOR;
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      1111 JUAN                                                                 
+         6 CU                                                                   
+                                                                                
+      2222 CARLOS                                                               
+         7 TU                                                                   
+                                                                                
+      3333 PEDRO                                                                
+         4 TEU                                                                  
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      4444 MARIA                                                                
+         7 TU                                                                   
+                                                                                
+      5555 IVAN                                                                 
+         1 CEU                                                                  
+                                                                                
+      6666 CARMEN                                                               
+         3 CD                                                                   
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      7777 MARIO                                                                
+         2 TU                                                                   
+                                                                                
+      8888 FRANCISCO                                                            
+         5 TU                                                                   
+                                                                                
+      9999 ANGELA                                                               
+         8 TEU                                                                  
+                                                                                
+
+       DNI P                                                                    
+---------- ------------------------------------------------------------         
+       CAR CAT                                                                  
+---------- -----                                                                
+      1010 DAVID                                                                
+         4 TU                                                                   
+                                                                                
+      2020 SOLEDAD                                                              
+         7 CU                                                                   
+                                                                                
+      3030 JOSE MANUEL                                                          
+         6 TEU                                                                  
+                                                                                
+
+12 rows selected.
+
+SQL> SET LINESIZE 150
+SQL> SELECT *
+  2  FROM PROFESOR;
+
+       DNI P                                                                   CAR CAT                                                                
+---------- ------------------------------------------------------------ ---------- -----                                                              
+      1111 JUAN                                                                  6 CU                                                                 
+      2222 CARLOS                                                                7 TU                                                                 
+      3333 PEDRO                                                                 4 TEU                                                                
+      4444 MARIA                                                                 7 TU                                                                 
+      5555 IVAN                                                                  1 CEU                                                                
+      6666 CARMEN                                                                3 CD                                                                 
+      7777 MARIO                                                                 2 TU                                                                 
+      8888 FRANCISCO                                                             5 TU                                                                 
+      9999 ANGELA                                                                8 TEU                                                                
+      1010 DAVID                                                                 4 TU                                                                 
+      2020 SOLEDAD                                                               7 CU                                                                 
+
+       DNI P                                                                   CAR CAT                                                                
+---------- ------------------------------------------------------------ ---------- -----                                                              
+      3030 JOSE MANUEL                                                           6 TEU                                                                
+
+12 rows selected.
+
+SQL> SELECT *
+  2  FROM PLAN_DOCENTE
+  3  ;
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                   
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                            
+      4444          1          3        1.5        1.5 01-SEP-11                                                                                      
+      4444          4        1.5          0        1.5 01-SEP-08 31-AUG-10                                                                            
+      4444          5          3          0          0 01-SEP-10                                                                                      
+      1111          8          3        1.5        1.5 01-SEP-07 31-AUG-09                                                                            
+      1111          8          3          0          0 01-SEP-09                                                                                      
+      3030          8          0        1.5        1.5 01-SEP-09                                                                                      
+      2222          4        1.5          0        1.5 01-SEP-09                                                                                      
+      2222          3        1.5          0        1.5 01-SEP-06 31-AUG-07                                                                            
+      1010          2        1.5        1.5          3 01-SEP-05 31-AUG-08                                                                            
+      3333          2        1.5        1.5          3 01-SEP-08                                                                                      
+      1010          9          3          0          3 01-SEP-08 31-AUG-09                                                                            
+
+       DNI        CAS        CTA        CPA        CLA FI        FF                                                                                   
+---------- ---------- ---------- ---------- ---------- --------- ---------                                                                            
+      1010          9        1.5          0        1.5 01-SEP-09                                                                                      
+      9999          7          3          3          0 01-SEP-10                                                                                      
+      5555          6          3          3          0 31-MAR-10                                                                                      
+      6666         10          3        1.5        1.5 01-SEP-08 31-AUG-11                                                                            
+      8888         11          6          0          0 01-SEP-09                                                                                      
+      2020          3        1.5          0        1.5 01-SEP-08                                                                                      
+      7777         12        4.5          3          0 01-SEP-10                                                                                      
+      3333          9        1.5          0        1.5 01-SEP-09                                                                                      
+
+19 rows selected.
+
+SQL> SELECT COUNT(DNI)
+  2  FROM PROFESOR
+  3  WHERE CAR IN
+  4  (SELECT CAR
+  5  FROM DEPARAMENTO
+  6  WHERE D='ASTROFISICA');
+FROM DEPARAMENTO
+     *
+ERROR at line 5:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT COUNT(DNI)
+  2  FROM PROFESOR
+  3  WHERE CAR IN
+  4  (SELECT CAR
+  5  FROM DEPARTAMENTO
+  6  WHERE D='ASTROFISICA');
+
+COUNT(DNI)                                                                                                                                            
+----------                                                                                                                                            
+        12                                                                                                                                            
+
+SQL> SELECT COUNT(DNI)
+  2  FROM PROFESOR
+  3  WHERE CAR IN( SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN(
+  6  SELECT CD
+  7  FROM DEPARTAMENTO
+  8  WHERE D='ASTROFISICA'));
+
+COUNT(DNI)                                                                                                                                            
+----------                                                                                                                                            
+         1                                                                                                                                            
+
+SQL> SELECT SYSTIMESTAMP
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT SYSTIMESTAMP
+  2  FROM DUAL;
+
+SYSTIMESTAMP                                                                                                                                          
+---------------------------------------------------------------------------                                                                           
+23-NOV-18 12.08.29.223935 PM +00:00                                                                                                                   
+
+SQL> SELECT COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  GROUP BY CD;
+
+COUNT(DNI)                                                                                                                                            
+----------                                                                                                                                            
+         3                                                                                                                                            
+         1                                                                                                                                            
+         1                                                                                                                                            
+         7                                                                                                                                            
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  GROUP BY CD
+  4  ORDER BY D ASC;
+SELECT D,COUNT(DNI)
+       *
+ERROR at line 1:
+ORA-00904: "D": invalid identifier 
+
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO
+  5  ORDER BY D)
+  6  GROUP BY CD;
+ORDER BY D)
+*
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO
+  5  ORDER BY D ASC)
+  6  GROUP BY CD;
+ORDER BY D ASC)
+*
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO)
+  5  ORDER BY D ASC
+  6  GROUP BY CD;
+GROUP BY CD
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO)
+  5  GROUP BY CD
+  6  ORDER BY D ASC;
+SELECT D,COUNT(DNI)
+       *
+ERROR at line 1:
+ORA-00904: "D": invalid identifier 
+
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  GROUP BY CD
+  4  ORDER BY D ASC;
+SELECT D,COUNT(DNI)
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT D,COUNT(DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  GROUP BY D
+  4  ORDER BY D ASC;
+
+D                                                            COUNT(DNI)                                                                               
+------------------------------------------------------------ ----------                                                                               
+ANALISIS MATEMATICO                                                   3                                                                               
+ASTROFISICA                                                           1                                                                               
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                    7                                                                               
+MATEMATICA FUNDAMENTAL                                                1                                                                               
+
+SQL> SELECT COUNT(T)
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS IN (SELECT CAS
+  4  FROM ASIGNA
+  5  
+SQL> SELECT COUNT(T)
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAR IN (SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO
+  7  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION'));
+WHERE CAR IN (SELECT CAR
+      *
+ERROR at line 3:
+ORA-00904: "CAR": invalid identifier 
+
+
+SQL> SELECT COUNT(T)
+  2  FROM ASIGNATURA
+  3  WHERE CAR IN (SELECT CAR
+  4  FROM AREA
+  5  WHERE CD IN (SELECT CD
+  6  FROM DEPARTAMENTO
+  7  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION'));
+
+  COUNT(T)                                                                                                                                            
+----------                                                                                                                                            
+         7                                                                                                                                            
+
+SQL> SELECT COUNT(T)
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO
+  5  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION'));
+WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION'))
+                                                             *
+ERROR at line 5:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT COUNT(T)
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO
+  5  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION');
+
+  COUNT(T)                                                                                                                                            
+----------                                                                                                                                            
+         7                                                                                                                                            
+
+SQL> SELECT COUNT DISTINCT(T)
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO
+  5  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION');
+SELECT COUNT DISTINCT(T)
+             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT COUNT (DISTINCT T)
+  2  FROM ASIGNATURA NATURAL JOIN AREA
+  3  WHERE CD IN (SELECT CD
+  4  FROM DEPARTAMENTO
+  5  WHERE D='ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION');
+
+COUNT(DISTINCTT)                                                                                                                                      
+----------------                                                                                                                                      
+               2                                                                                                                                      
+
+SQL> SELECT COUNT(P)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE AR LIKE 'A%';
+
+  COUNT(P)                                                                                                                                            
+----------                                                                                                                                            
+         3                                                                                                                                            
+
+SQL> SELECT T,COUNT(A)
+  2  FROM ASIGNATURA
+  3  GROUP BY T
+  4  ORDER BY T;
+
+T      COUNT(A)                                                                                                                                       
+---- ----------                                                                                                                                       
+GF            1                                                                                                                                       
+GII           7                                                                                                                                       
+GM            2                                                                                                                                       
+MII           2                                                                                                                                       
+
+SQL> SELECT T,COUNT(A)
+  2  FROM ASIGNATURA
+  3  GROUP BY T
+  4  ORDER BY T ASC
+  5  ;
+
+T      COUNT(A)                                                                                                                                       
+---- ----------                                                                                                                                       
+GF            1                                                                                                                                       
+GII           7                                                                                                                                       
+GM            2                                                                                                                                       
+MII           2                                                                                                                                       
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT >= (SELECT MAX(CT)
+  4  FROM ASIGNATURA);
+
+A                                                                                                                                                     
+--------------------------------------------------                                                                                                    
+ENSENANZA DE LA MATEMATICA                                                                                                                            
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT <= (SELECT MIN(CT)
+  4  FROM ASIGNATURA);
+
+A                                                                                                                                                     
+--------------------------------------------------                                                                                                    
+INTELIGENCIA ARTIFICIAL                                                                                                                               
+ALMACENES DE DATOS                                                                                                                                    
+MINERIA DE DATOS                                                                                                                                      
+
+SQL> SELECT A,SUM(CT+CP+CL)
+  2  FROM ASIGNATURA
+  3  GROUP BY A;
+
+A                                                  SUM(CT+CP+CL)                                                                                      
+-------------------------------------------------- -------------                                                                                      
+ALGEBRA                                                        6                                                                                      
+INFORMATICA BASICA                                             6                                                                                      
+OPTIMIZACION                                                   6                                                                                      
+CALCULO                                                        6                                                                                      
+GESTION DE RIESGOS                                             6                                                                                      
+ENSENANZA DE LA MATEMATICA                                     6                                                                                      
+ANALISIS COMPLEJO                                            7.5                                                                                      
+BASE DE DATOS                                                  6                                                                                      
+INTELIGENCIA ARTIFICIAL                                        6                                                                                      
+MINERIA DE DATOS                                               3                                                                                      
+ALMACENES DE DATOS                                             3                                                                                      
+
+A                                                  SUM(CT+CP+CL)                                                                                      
+-------------------------------------------------- -------------                                                                                      
+ASTRONOMIA                                                     6                                                                                      
+
+12 rows selected.
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL >= (SELECT MAX(CT+CP+CL)
+  4  FROM ASIGNATURA);
+
+A                                                                                                                                                     
+--------------------------------------------------                                                                                                    
+ANALISIS COMPLEJO                                                                                                                                     
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL <= (SELECT MIN(CT+CP+CL)
+  4  FROM ASIGNATURA);
+
+A                                                                                                                                                     
+--------------------------------------------------                                                                                                    
+ALMACENES DE DATOS                                                                                                                                    
+MINERIA DE DATOS                                                                                                                                      
+
+SQL> SELECT AR
+  2  FROM AREA
+  3  WHERE CAR IN(SELECT CAR
+  4  FROM ASIGNATURA
+  5  WHERE CT+CP+CL)>=(SELECT MAX(CT+CL+CP)
+  6  FROM ASIGNATURA);
+WHERE CT+CP+CL)>=(SELECT MAX(CT+CL+CP)
+              *
+ERROR at line 5:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT AR
+  2  FROM AREA
+  3  WHERE CAR IN(SELECT CAR
+  4  FROM ASIGNATURA
+  5  WHERE CT+CP+CL>=(SELECT MAX(CT+CL+CP)
+  6  FROM ASIGNATURA));
+
+AR                                                                                                                                                    
+------------------------------------------------------------                                                                                          
+ANALISIS MATEMATICO                                                                                                                                   
+
+SQL> SELECT DISTINCT A
+  2  FROM ASIGNATURA NATURAL JOIN PLAN_DOCENTE
+  3  WHERE DNI=1111;
+
+A                                                                                                                                                     
+--------------------------------------------------                                                                                                    
+OPTIMIZACION                                                                                                                                          
+
+SQL> SELECT SUM(CTA,CLA,CPA)
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI=1111;
+SELECT SUM(CTA,CLA,CPA)
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> SELECT SUM(CTA+CLA+CPA)
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI=1111;
+
+SUM(CTA+CLA+CPA)                                                                                                                                      
+----------------                                                                                                                                      
+               9                                                                                                                                      
+
+SQL> SELECT P
+  2  FROM PROFESOR PRO, PLAN_DOCENTE PD;
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+JUAN                                                                                                                                                  
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+CARLOS                                                                                                                                                
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+PEDRO                                                                                                                                                 
+PEDRO                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+MARIA                                                                                                                                                 
+IVAN                                                                                                                                                  
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+IVAN                                                                                                                                                  
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+CARMEN                                                                                                                                                
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+MARIO                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+MARIO                                                                                                                                                 
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+FRANCISCO                                                                                                                                             
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+ANGELA                                                                                                                                                
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+DAVID                                                                                                                                                 
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+SOLEDAD                                                                                                                                               
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+JOSE MANUEL                                                                                                                                           
+
+228 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR PRO, PLAN_DOCENTE PD
+  3  WHERE (PRO.DNI=PD.DNI) AND (FF IS NULL)
+  4  GROUP BY PD.DNI,PPRO.DNI
+  5  HAVING SUM(CTA+CLA+CPA) >= ALL(SELECT SUM(CTA+CLA+CPA)
+  6  FROM PLAN_DOCENTE
+  7  WHERE FF IS NULL
+  8  GROUP BY DNI);
+GROUP BY PD.DNI,PPRO.DNI
+                *
+ERROR at line 4:
+ORA-00904: "PPRO"."DNI": invalid identifier 
+
+
+SQL> SELECT P
+  2  FROM PROFESOR PRO, PLAN_DOCENTE PD
+  3  WHERE (PRO.DNI=PD.DNI) AND (FF IS NULL)
+  4  GROUP BY PD.DNI,PRO.DNI
+  5  HAVING SUM(CTA+CLA+CPA) >= ALL(SELECT SUM(CTA+CLA+CPA)
+  6  FROM PLAN_DOCENTE
+  7  WHERE FF IS NULL
+  8  GROUP BY DNI);
+SELECT P
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT P
+  2  FROM PROFESOR PRO, PLAN_DOCENTE PD
+  3  WHERE (PRO.DNI=PD.DNI) AND (FF IS NULL)
+  4  GROUP BY PRO.P
+  5  HAVING SUM(CTA+CLA+CPA) >= ALL(SELECT SUM(CTA+CLA+CPA)
+  6  FROM PLAN_DOCENTE
+  7  WHERE FF IS NULL
+  8  GROUP BY DNI);
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+PEDRO                                                                                                                                                 
+MARIA                                                                                                                                                 
+
+SQL> SELECT P
+  2  FROM PROFESOR PRO, PLAN_DOCENTE PD
+  3  WHERE (PRO.DNI=PD.DNI) AND FF IS NULL
+  4  GROUP BY P
+  5  HAVING SUM(CTA+CLA+CPA) >=ALL(SELECT SUM(CTA+CLA+CPA)
+  6  FROM PLAN_DOCENTE
+  7  WHERE FF IS NULL
+  8  GROUP BY DNI);
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+PEDRO                                                                                                                                                 
+MARIA                                                                                                                                                 
+
+SQL> SELECT P
+  2  FROM PROFESOR PRO, PLAN_DOCENTE PD
+  3  WHERE (PRO.DNI=PD.DNI) AND FF IS NULL
+  4  GROUP BY P, DNI
+  5  HAVING SUM(CTA+CLA+CPA) >=ALL(SELECT SUM(CTA+CLA+CPA)
+  6  FROM PLAN_DOCENTE
+  7  WHERE FF IS NULL
+  8  GROUP BY DNI);
+GROUP BY P, DNI
+            *
+ERROR at line 4:
+ORA-00918: column ambiguously defined 
+
+
+SQL> SLEECT P
+SP2-0042: unknown command "SLEECT P" - rest of line ignored.
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF IS NULL
+  6  GROUP BY DNI
+  7  HAVING SUM(CTA+CLA+CPA) >= ALL(SELECT SUM(CTA+CLA+CPA)
+  8  FROM PLAN_DOCENTE
+  9  WHERE FF IS NULL
+ 10  GROUP BY DNI));
+
+P                                                                                                                                                     
+------------------------------------------------------------                                                                                          
+MARIA                                                                                                                                                 
+PEDRO                                                                                                                                                 
+
+SQL> SPOOL OFF
